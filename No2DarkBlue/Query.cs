@@ -164,7 +164,7 @@ namespace No2DarkBlue
 
             return res.ToArray();
         }
-    
+
         /// <summary>
         /// 透過 RowKey 取得所有Keys 
         /// SLOW
@@ -173,7 +173,7 @@ namespace No2DarkBlue
         /// </summary>
         /// <param name="rowKey"></param>
         /// <returns></returns>
-        public DTableEntity[] AllDataKeysByRowKey(string rowKey = "")
+        public DTableEntity[] AllDataKeysByRK(string rowKey = "")
         {
 
             var res = new ConcurrentList<DTableEntity>();
@@ -206,7 +206,7 @@ namespace No2DarkBlue
 
             return res.ToArray();
         }
-        
+
         /// <summary>
         /// 透過 PartitionKey 取得所有Keys 
         /// SLOW
@@ -217,7 +217,7 @@ namespace No2DarkBlue
         /// <returns></returns>
         public DTableEntity[] AllDataKeysByPK(string partitionKey = "")
         {
-            
+
             var res = new ConcurrentList<DTableEntity>();
 
             var query = new TableQuery<DTableEntity>()
@@ -248,7 +248,7 @@ namespace No2DarkBlue
 
             return res.ToArray();
         }
-        
+
         /// <summary>
         /// 取得所有PartitionKeys
         /// FAST
@@ -313,7 +313,7 @@ namespace No2DarkBlue
                     q.SelectColumns.Add(p);
                 }
             }
-            
+
             return DatasByTableQuery(new TableQuery<T>());
         }
 
@@ -451,15 +451,15 @@ namespace No2DarkBlue
                     query.SelectColumns.Add(p);
                 }
             }
+
+            query.FilterString = TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, rowKey);
+
             return DatasByTableQuery(query);
         }
 
         public IEnumerable<T> DatasByExpression(Expression<Func<T, bool>> expression)
         {
-            var query = new TableQuery<T>();
-            var q = query.Where(expression).AsTableQuery();
-            return DatasByTableQuery(q);
-
+            return CTable.CreateQuery<T>().Where(expression);
         }
 
         /// <summary>
@@ -541,6 +541,7 @@ namespace No2DarkBlue
                     query.SelectColumns.Add(p);
                 }
             }
+            query.FilterString = filterString;
             return DatasByTableQuery(query);
 
         }
