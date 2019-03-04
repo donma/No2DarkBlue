@@ -29,9 +29,10 @@ namespace No2DarkBlue
 
             try
             {
-
+                TableName = tableName;
                 CSAgent = CloudStorageAccount.Parse(connectionString);
                 CTClient = CSAgent.CreateCloudTableClient();
+                CTable = CTClient.GetTableReference(TableName);
 
                 if (autoCreateTable)
                 {
