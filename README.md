@@ -56,19 +56,39 @@ op.UpdateWithConfirmETag(obj);
     
 ```
 
-Delete Data 
+Delete Data -
 
 ```csharp
 
 op.Delete("RK1", "PK1");
     
 ```
-Delete DAta With Confirm Etag
+Delete DAta With Confirm Etag -
 
 ```csharp
 
 op.DeleteWithEtag("RK", "PK", obj.ETag);
     
 ```
+## Query
+
+IsDataExisted - 
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+Response.Write(q.IsDataExisted("USER999", "GROUP10") + "<br>");
+Response.Write(q.IsDataExisted("USER111111", "GROUP1") + "<br>");
+    
+```
+
+AllDataCount -  Get All Table Count 
+
+```csharp
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+Response.Write(q.AllDataCount()+" ! ");
+
+```
+
 
 
