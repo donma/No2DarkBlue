@@ -20,8 +20,8 @@ Example :
     }
     
 ```
-
-Update Data:
+Operator 
+Update Data
 ----
 
 ```csharp
