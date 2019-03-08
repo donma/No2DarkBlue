@@ -72,7 +72,7 @@ op.DeleteWithEtag("RK", "PK", obj.ETag);
 ```
 ## Query
 
-IsDataExisted - 
+IsDataExisted - Check PK+RK Data is Existed.
 
 ```csharp
 
@@ -89,6 +89,74 @@ var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
 Response.Write(q.AllDataCount()+" ! ");
 
 ```
+
+AllDataKeys - Get All  DTableEntity Datas
+
+```csharp
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+var res = q.AllDataKeys();
+
+if (res != null)
+{
+    Response.Write("COUNT:"+res.Count() + "<br>");
+    foreach(var c in res)
+    {
+        Response.Write(c.PartitionKey+","+c.RowKey)
+    }
+}
+```
+
+AllDataKeysByRowKey - 
+
+```csharp
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+var res = q.AllDataKeysByRK("USER11");
+if (res != null)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+```
+
+AllDataKeysByPK - Get All Datas by PartitionKey
+
+```csharp
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+var res = q.AllDataKeysByPK("GROUP2");
+if (res != null)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+
+```
+
+AllPKs - Get All Partition Keys
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+var res = q.AllPKs();
+if (res != null)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+
+```
+
 
 
 
