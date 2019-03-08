@@ -259,6 +259,8 @@ if (res != null)
 
 ```
 
+## Advanced Query
+
 DatasByExpression
 
 ```csharp
