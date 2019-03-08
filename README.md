@@ -23,7 +23,7 @@ Example :
 ## Operator
 
 Update Data
----
+
 ```csharp
 
             var op = new No2DarkBlue.Operator(conn, "SAMPLETABLE");
