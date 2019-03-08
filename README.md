@@ -22,7 +22,7 @@ Example :
 ``` 
 ## Operator
 
-Update Data
+Update Data - 
 
 ```csharp
 
@@ -47,4 +47,28 @@ Update Data
             op.Update(obj);
     
 ```
+
+Update Data With Confirm ETag - 
+
+```csharp
+
+op.UpdateWithConfirmETag(obj);
+    
+```
+
+Delete Data 
+
+```csharp
+
+op.Delete("RK1", "PK1");
+    
+```
+Delete DAta With Confirm Etag
+
+```csharp
+
+op.DeleteWithEtag("RK", "PK", obj.ETag);
+    
+```
+
 
