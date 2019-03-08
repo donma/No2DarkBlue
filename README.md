@@ -1,6 +1,6 @@
 # No2DarkBlue
 ----
-一個讓您更簡單使用 [WindowsAzure.Storage](https://www.nuget.org/packages/WindowsAzure.Storage/) 的工具，其中主要幫助了幾個問題
+一個讓您更簡單使用 [WindowsAzure.Storage](https://www.nuget.org/packages/WindowsAzure.Storage/) 的工具，主要讓你可以更簡單去使用 Azure Storage Table.
 
 DTableEntity
 ---
