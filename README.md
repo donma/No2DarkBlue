@@ -72,7 +72,7 @@ op.DeleteWithEtag("RK", "PK", obj.ETag);
 ```
 ## Query
 
-IsDataExisted - Check PK+RK Data is Existed.
+IsDataExisted - Check PK and RK Data is Existed.
 
 ```csharp
 
