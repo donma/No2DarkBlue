@@ -63,7 +63,7 @@ Delete Data -
 op.Delete("RK1", "PK1");
     
 ```
-Delete DAta With Confirm Etag -
+Delete Data With Confirm Etag -
 
 ```csharp
 
