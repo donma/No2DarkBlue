@@ -90,7 +90,7 @@ Response.Write(q.AllDataCount()+" ! ");
 
 ```
 
-AllDataKeys - Get All  DTableEntity Datas
+AllDataKeys - Get All  DTableEntity Data Keys ,  return is DTableEntity[]
 
 ```csharp
 var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
@@ -122,7 +122,7 @@ if (res != null)
 }
 ```
 
-AllDataKeysByPK - Get All Datas by PartitionKey
+AllDataKeysByPK - Get All Data Keys by PartitionKey , return is DTableEntity[]
 
 ```csharp
 var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
@@ -139,7 +139,7 @@ if (res != null)
 
 ```
 
-AllPKs - Get All Partition Keys
+AllPKs - Get All Partition Keys , return is string[]
 
 ```csharp
 
@@ -156,6 +156,180 @@ if (res != null)
 }
 
 ```
+
+AllDatas - Get All Table Datas
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+var res = q.AllDatas();
+if (res != null)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+
+```
+
+DatasByPKRKs - Get Datas by PartitionKey and RowKey Pair
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+
+var res = q.DatasByPKRKs(new No2DarkBlue.TableKeyPair("USER99", "GROUP1"), new No2DarkBlue.TableKeyPair("USER995", "GROUP10"), new No2DarkBlue.TableKeyPair("DATA_NOT_EXISTE", "GROUP1"));
+
+if (res.Count()>0)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+
+```
+
+DataByPKRK - Get One Data by PartitionKey and RowKey
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+
+var res1 = q.DataByPKRK("USER99", "GROUP1");
+
+if (res1 != null)
+{
+    Response.Write(JsonConvert.SerializeObject(res1) + "<br>");
+}
+else {
+    Response.Write("RES1 NO DATA" + "<br>");
+}
+
+var res2 = q.DataByPKRK("DATANOTEXISTED", "GROUP1");
+if (res2 != null)
+{
+    Response.Write(JsonConvert.SerializeObject(res2) + "<br>");
+}
+else
+{
+    Response.Write("RES2 NO DATA" + "<br>");
+}
+
+```
+
+DatasByPK - Get All Data By PartitionKey
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+var res = q.DatasByPK("GROUP4");
+if (res != null)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+
+```
+
+DatasByRK - Get All Data By RowKey
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE", false);
+var res = q.DatasByRK("USER99");
+if (res != null)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+
+```
+
+DatasByExpression
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE");
+var res = q.DatasByExpression(x => x.Age > 0);
+if (res != null)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+
+```
+
+DatasByFilterCondition
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE");
+var res = q.DatasByFilterCondition(
+        TableQuery.GenerateFilterConditionForInt("Age", QueryComparisons.GreaterThanOrEqual, 950),
+        new string[] { TableOperators.And, TableOperators.And },
+        new string[] { TableQuery.GenerateFilterCondition("Name", QueryComparisons.GreaterThanOrEqual, "USER9"),
+                        TableQuery.GenerateFilterConditionForBool("IsSingle", QueryComparisons.Equal, true)
+                        }
+
+    );
+
+if (res != null)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+
+```
+
+DatasByFilterString
+
+```csharp
+
+var q = new No2DarkBlue.Query<User>(conn, "SAMPLETABLE");
+var res = q.DatasByFilterString("Age ge 950 and Age lt 1000");
+
+if (res != null)
+{
+    Response.Write("COUNT:" + res.Count() + "<br>");
+    foreach (var c in res)
+    {
+        Response.Write(JsonConvert.SerializeObject(c) + "<br>");
+
+    }
+}
+
+```
+
+Happy Coding :)
+
+
+
+
+
+
+
 
 
 
