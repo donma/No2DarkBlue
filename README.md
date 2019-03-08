@@ -101,7 +101,7 @@ if (res != null)
     Response.Write("COUNT:"+res.Count() + "<br>");
     foreach(var c in res)
     {
-        Response.Write(c.PartitionKey+","+c.RowKey)
+        Response.Write(c.PartitionKey+","+c.RowKey);
     }
 }
 ```
