@@ -26,6 +26,7 @@ Update Data -
 
 ```csharp
 
+            //conn is your connection string
             var op = new No2DarkBlue.Operator(conn, "SAMPLETABLE");
 
             var obj = new Foo();
